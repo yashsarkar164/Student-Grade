@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <!-- Log Out Button at the top right corner -->
+        <div class="d-flex justify-content-end mb-4">
+            <button class="btn btn-danger" onclick="logout()">Log Out</button>
+        </div>
+        
+        <h1 class="text-center mb-4">Student Dashboard</h1>
+        
+        <!-- Student Information Card -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Student Information</h5>
+                <p><strong>Name:</strong> YASH SARKAR</p>
+                <p><strong>Student ID:</strong> 043</p>
+                <p><strong>Degree:</strong> Computer Science</p>
+            </div>
+        </div>
+
+        <!-- Marks Table -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Grades</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maths</td>
+                            <td>85</td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td>90</td>
+                        </tr>
+                        <tr>
+                            <td>Computer Science</td>
+                            <td>88</td>
+                        </tr>
+                        <tr>
+                            <td>Physics</td>
+                            <td>78</td>
+                        </tr>
+                        <tr>
+                            <td>Chemistry</td>
+                            <td>82</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CGPA Graph Card -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">CGPA Progress Over Semesters</h5>
+            </div>
+            <div class="card-body py-3">
+                <div class="chart chart-sm">
+                    <canvas id="cgpa-chart" style="height: 252px; width: 428px;" width="856" height="504"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Chart.js Script for CGPA Graph -->
+    <script>
+    var ctx = document.getElementById('cgpa-chart').getContext('2d');
+
+    var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+    gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+    gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+
+    var cgpaChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: ["Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6", "Semester 7", "Semester 8"],
+            datasets: [{
+                label: "CGPA",
+                fill: true,
+                backgroundColor: gradient,
+                borderColor: "#28a745", // Green color for the line
+                data: [8.5,8] // Sample CGPA values
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            tooltips: {
+                intersect: false
+            },
+            hover: {
+                intersect: true
+            },
+            plugins: {
+                filler: {
+                    propagate: false
+                }
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        color: "rgba(0,0,0,0.0)"
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        stepSize: 0.5,
+                        max: 10,
+                        min: 6
+                    },
+                    display: true,
+                    gridLines: {
+                        color: "rgba(0,0,0,0.0)"
+                    }
+                }]
+            }
+        }
+    });
+
+    function logout() {
+        // Redirect to login page or perform log out actions
+        alert("Logging out...");
+        window.location.href = "login.html"; // Replace with your login page URL
+    }
+    </script>
+</body>
+</html>
